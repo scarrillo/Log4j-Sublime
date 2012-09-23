@@ -1,6 +1,6 @@
 Log4j-Sublime
 =============
-Sublime plugin and syntax hilighting! Be gentle! Python amateur alert.
+Sublime plugin and syntax highlighting! Be gentle! Python amateur.
 
 ![](https://raw.github.com/scarrillo/Log4j-Sublime/master/imgs/log4j.png)
 
