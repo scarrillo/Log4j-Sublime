@@ -48,6 +48,8 @@ Sublime plugin and syntax highlighting! Be gentle! Python amateur.
     log4j.appender.ToFile.layout=org.apache.log4j.PatternLayout
     log4j.appender.ToFile.layout.ConversionPattern=[%p][%c{2}]: %m%n
 
+    - Expected output:
+      [LEVEL][category]: Message
 
 
 TODO:
