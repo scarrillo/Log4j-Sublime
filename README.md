@@ -51,6 +51,7 @@ Sublime plugin and syntax hilighting! Be gentle! Python amateur alert.
 TODO:
   - Separate configuration for log file. Currently looks for: log4j.log
   - Regexp for filter
+  - Optimize append. Has to be a cleaner way to open/configure/append this.
   - Figure out how to bundle this all up
   - Learn more Python oO
 
