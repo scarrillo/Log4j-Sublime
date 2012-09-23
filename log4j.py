@@ -1,3 +1,13 @@
+'''
+# Author: shawn.carrillo+log4j@gmail.com
+# Source: https://github.com/scarrillo/Log4j-Sublime
+# Version 1.0
+# Date: 2012.09.23
+#
+# Credit for tail.py: 
+# Author - Kasun Herath <kasunh01 at gmail.com>
+# Source - https://github.com/kasun/python-tail
+''' 
 import sublime, sublime_plugin, os, subprocess, thread, time, tail, threading
 
 class Log4jCommand(sublime_plugin.WindowCommand):
