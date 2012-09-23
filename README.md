@@ -36,9 +36,22 @@ Sublime plugin and syntax hilighting! Be gentle! Python amateur alert.
     - Bring the log4j panel to the front
       { "keys": ["ctrl+super+t"], "command": "show_panel", "args": {"panel": "output.log4j"} },
 
+  5: Log4j: Matches with this FileAppender config
+
+    log4j.appender.ToFile=org.apache.log4j.FileAppender
+    log4j.appender.ToFile.threshold=DEBUG
+    log4j.appender.ToFile.Append=false
+    log4j.appender.ToFile.ImmediateFlush=true
+    log4j.appender.ToFile.File=log4j.log
+    log4j.appender.ToFile.layout=org.apache.log4j.PatternLayout
+    log4j.appender.ToFile.layout.ConversionPattern=[%p][%c{2}]: %m%n
+
+
+
 TODO:
   - Separate configuration for log file. Currently looks for: log4j.log
   - Regexp for filter
-  
+  - Figure out how to bundle this all up
+  - Learn more Python oO
 
   
