@@ -32,10 +32,13 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 				self.level = ""
 				self.filter = filter
 				self.append("[INFO][sublime]: Filter String: "+ self.filter +"\n")
+		else:
+			self.append("[INFO][sublime]: No Filter\n")
 
 	def doMessage(self, message):
 		if ( len(self.level) != 0 and message.startswith(self.level) ) or \
-			(len(self.filter) != 0 and message.find(self.filter) >= 0):
+			(len(self.filter) != 0 and message.find(self.filter) >= 0) or \
+			(len(self.filter) == 0):
 
 			self.append(message.rstrip()+"\n")
 		#else:
@@ -68,9 +71,11 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		self.output_view.show_at_center(self.output_view.size())
 
 	def edit_clear(self):
+		self.output_view.set_read_only(False)
 		edit = self.output_view.begin_edit()
 		self.output_view.erase(edit, sublime.Region(0, self.output_view.size()))
 		self.output_view.end_edit(edit)
+		self.output_view.set_read_only(True)
 
 	def init_view(self, name, syn):
 		# only use "get_output_panel" once, otherwise sublime will
@@ -80,7 +85,7 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 			self.output_view.set_syntax_file(syn)
 		
 		#self.output_view.set_read_only(False)
-		#self.edit_clear()
+		self.edit_clear()
 		sublime.active_window().run_command("show_panel", {"panel": "output."+name})
 
 	#def end_view(self, syn):
