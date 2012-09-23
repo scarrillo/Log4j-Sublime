@@ -57,6 +57,7 @@ TODO:
   - Regexp for filter
   - Optimize append. Has to be a cleaner way to open/configure/append this.
   - Figure out how to bundle this all up
+  - Handle file resets gracefully
   - Learn more Python oO
 
   
