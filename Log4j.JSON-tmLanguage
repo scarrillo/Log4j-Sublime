@@ -1,0 +1,79 @@
+{ "name": "Log4j",
+	"scopeName": "text.log4j",
+	"fileTypes": ["log"],
+	"patterns": [
+		{ "match": "^(\\[)(TRACE)(\\]\\[)(.+)(\\]: )(.+)$",
+			"name": "string.quoted.log4j",
+			"captures": {
+				"1": { "name": "control.log4j" },
+				"2": { "name": "entity.trace.log4j" },
+				"3": { "name": "control.log4j" },
+				"4": { "name": "entity.trace.log4j" },
+				"5": { "name": "control.log4j" },
+				"6": { "name": "entity.trace.message.log4j" }
+			},	  
+			"comment": "TRACE log"
+		},
+		{ "match": "^(\\[)(DEBUG)(\\]\\[)(.+)(\\]: )(.+)$",
+			"name": "string.quoted.log4j",
+			"captures": {
+				"1": { "name": "control.log4j" },
+				"2": { "name": "entity.debug.log4j" },
+				"3": { "name": "control.log4j" },
+				"4": { "name": "entity.debug.log4j" },
+				"5": { "name": "control.log4j" },
+				"6": { "name": "entity.debug.message.log4j" }
+			},	  
+			"comment": "DEBUG log"
+		},
+		{ "match": "^(\\[)(INFO)(\\]\\[)(.+)(\\]: )(.+)$",
+			"name": "string.quoted.log4j",
+			"captures": {
+				"1": { "name": "control.log4j" },
+				"2": { "name": "entity.info.log4j" },
+				"3": { "name": "control.log4j" },
+				"4": { "name": "entity.info.log4j" },
+				"5": { "name": "control.log4j" },
+				"6": { "name": "entity.info.message.log4j" }
+			},	  
+			"comment": "INFO log"
+		},
+		{ "match": "^(\\[)(WARN)(\\]\\[)(.+)(\\]: )(.+)$",
+			"name": "string.quoted.log4j",
+			"captures": {
+				"1": { "name": "control.log4j" },
+				"2": { "name": "entity.warn.log4j" },
+				"3": { "name": "control.log4j" },
+				"4": { "name": "entity.warn.log4j" },
+				"5": { "name": "control.log4j" },
+				"6": { "name": "entity.warn.message.log4j" }
+			},	  
+			"comment": "WARN log"
+		},
+		{ "match": "^(\\[)(ERROR)(\\]\\[)(.+)(\\]: )(.+)$",
+			"name": "string.quoted.log4j",
+			"captures": {
+				"1": { "name": "control.log4j" },
+				"2": { "name": "entity.error.log4j" },
+				"3": { "name": "control.log4j" },
+				"4": { "name": "entity.error.log4j" },
+				"5": { "name": "control.log4j" },
+				"6": { "name": "entity.error.message.log4j" }
+			},	  
+			"comment": "ERROR log"
+		},
+		{ "match": "^(\\[)(FATAL)(\\]\\[)(.+)(\\]: )(.+)$",
+			"name": "string.quoted.log4j",
+			"captures": {
+				"1": { "name": "control.log4j" },
+				"2": { "name": "entity.fatal.log4j" },
+				"3": { "name": "control.log4j" },
+				"4": { "name": "entity.fatal.log4j" },
+				"5": { "name": "control.log4j" },
+				"6": { "name": "entity.fatal.message.log4j" }
+			},	  
+			"comment": "ERROR log"
+		}
+	],
+	"uuid": "59d2eab0-506c-4c33-8e2f-a6a74820383a"
+}
