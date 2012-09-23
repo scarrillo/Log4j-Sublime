@@ -17,11 +17,11 @@ Sublime plugin and syntax highlighting! Be gentle! Python amateur.
 
   2: Log4j Theme. Add the relevant lines to your current theme and customize!
 
-    - log4j.tmTheme
+    - Log4j.tmTheme
 
   3: Log4j Sublime Plugin:
 
-    - log4j.py
+    - Log4j.py
     - tail.py
       ** This plugin requires Kasum's awesome Python tail script.
       ** His original code is here: https://github.com/kasun/python-tail
