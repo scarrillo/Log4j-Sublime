@@ -12,7 +12,7 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		# some unique name for your output panel
 		panel_name = 'log4j'
 		# relative path to your custom syntax
-		custom_syntax = 'Packages/Log4j/Log4j.tmLanguage'
+		custom_syntax = 'Packages/User/Log4j.tmLanguage'
 		logFile = sublime.active_window().folders()[0] + "/log4j.log"
 
 		self.init_view(panel_name, custom_syntax)
