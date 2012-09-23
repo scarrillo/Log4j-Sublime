@@ -33,8 +33,12 @@ class Tail(object):
         with open(self.tailed_file) as file_:
             # Go to the end of file
             file_.seek(0,2)
-            #while True:
+
             while self.RUN:
+                #if file_.closed:
+                #    file_ = open(self.tailed_file)
+                #    file_.seek(0,2)
+
                 curr_position = file_.tell()
                 line = file_.readline()
                 if not line:

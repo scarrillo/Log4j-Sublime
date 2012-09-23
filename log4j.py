@@ -38,7 +38,7 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 	def doMessage(self, message):
 		if ( len(self.level) != 0 and message.startswith(self.level) ) or \
 			(len(self.filter) != 0 and message.find(self.filter) >= 0) or \
-			(len(self.filter) == 0):
+			(len(self.level) == 0 and len(self.filter) == 0):
 
 			self.append(message.rstrip()+"\n")
 		#else:
