@@ -70,11 +70,13 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		print "initThreads: "+str(threading.activeCount())
 		main = threading.currentThread()
 		for t in threading.enumerate():
-			if t is main:
+			if t is TailThread:
+				t.stop()
+			#if t is main:
 				#print "Main Thread: ignore"
-				continue
+			#	continue
 			#print "Stop: "+t.logFile
-			t.stop()
+			#t.stop()
 
 	def append(self, data):
 		self.output_view.set_read_only(False)
