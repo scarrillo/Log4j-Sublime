@@ -2,21 +2,27 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>comment</key>
+	<key>name</key>
+	<string>Log4jTheme</string>
+	<!-- 
 	<string>
 		Log4j hilights. Copy the relevant nodes into your current theme. Let me know if there is an easier way to override this!
-		<!-- log4j levels:
-			TRACE,
-			DEBUG,
-			INFO,
-			WARN,
-			ERROR,
-			FATAL -->
-	</string>
-	<key>name</key>
-	<string>Log4j</string>
+		log4j levels: TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+	</string> -->
 	<key>settings</key>
 	<array>
+		<dict>
+			<key>background</key>
+			<string>#383838</string>
+			<key>caret</key>
+			<string>#F8F8F8</string>
+			<key>foreground</key>
+			<string>#F8F8F8</string>
+			<key>invisibles</key>
+			<string>#3B3B3B</string>
+			<key>selection</key>
+			<string>#222222</string>
+		</dict>
 		<dict>
 			<key>name</key>
 			<string>Log4j TRACE</string>

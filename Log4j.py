@@ -23,9 +23,10 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		panel_name = 'log4j'
 		# relative path to your custom syntax
 		custom_syntax = 'Packages/Log4j/Log4j.tmLanguage'
+		custom_scheme = 'Packages/Log4j/Log4j.tmTheme'
 		logFile = sublime.active_window().folders()[0] + "/log4j.log"
 
-		self.init_view(panel_name, custom_syntax)
+		self.init_view(panel_name, custom_syntax, custom_scheme)
 		self.initFilter(filter)
 		self.initTail(logFile)
 		#self.end_view(custom_syntax) # Need to leave open for threaded use
@@ -37,13 +38,16 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		if len(filter) != 0:
 			if filter.upper() in self.LEVELS:
 				self.level = "["+filter.upper()+"]"
-				self.append("[INFO][sublime]: Filter Level: "+ self.level +"\n")
+				self.append("[INFO][Log4j]: Filter Level: "+ self.level +"\n")
+				sublime.status_message("Log4j: Filter Level: "+ self.level)
 			else:
 				self.level = ""
 				self.filter = filter
-				self.append("[INFO][sublime]: Filter String: "+ self.filter +"\n")
+				self.append("[INFO][Log4j]: Filter String: "+ self.filter +"\n")
+				sublime.status_message("Log4j: Filter String: "+ self.level)
 		else:
-			self.append("[INFO][sublime]: No Filter\n")
+			self.append("[INFO][Log4j]: No Filter\n")
+			sublime.status_message("Log4j: No Filter")
 
 	def doMessage(self, message):
 		if ( len(self.level) != 0 and message.startswith(self.level) ) or \
@@ -87,7 +91,7 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		self.output_view.end_edit(edit)
 		self.output_view.set_read_only(True)
 
-	def init_view(self, name, syn):
+	def init_view(self, name, syn, scheme=None):
 		# only use "get_output_panel" once, otherwise sublime will
 		# recreate a new one and you will lose any existing text
 		if not hasattr(self, 'output_view'):
@@ -97,6 +101,13 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		#self.output_view.set_read_only(False)
 		self.edit_clear()
 		sublime.active_window().run_command("show_panel", {"panel": "output."+name})
+
+		# if scheme is not None:
+		# 	if not hasattr(self, 'output_view_exec'):
+		# 		self.output_view_exec = self.window.get_output_panel("exec")
+		# 	self.output_view_exec.settings().set("color_scheme", scheme)
+		# 	self.output_view_exec.set_syntax_file(syn)
+		# 	sublime.active_window().run_command("show_panel", {"panel": "output.exec"})
 
 	#def end_view(self, syn):
 		#self.output_view.set_read_only(True)
