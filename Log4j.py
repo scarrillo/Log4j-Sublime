@@ -63,11 +63,14 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 
 	def initTail(self, logFile):
 		self.initThreads()
-		tailThread = TailThread(logFile, self.doTailOut) #file, callback
+
+		threadId = threading.activeCount() + 1
+		tailThread = TailThread(logFile, self.doTailOut, threadId) #file, callback
 		tailThread.start()
 
 	def initThreads(self):
-		print "initThreads: "+str(threading.activeCount())
+		print "Log4j: Current Threads: "+str(threading.activeCount())
+
 		main = threading.currentThread()
 		for t in threading.enumerate():
 			if isinstance(t, TailThread):
@@ -115,17 +118,18 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		#self.output_view.set_syntax_file(syn)
 
 class TailThread (threading.Thread):
-	def __init__(self, logFile, callback):
-		print "TailThread: init"
+	def __init__(self, logFile, callback, threadId):
 		self.logFile = logFile
 		self.tail = tail.Tail(self.logFile)
+		self.threadId = threadId
+		print "\tLog4j: init ID #"+ str(self.threadId)
 		self.tail.register_callback(callback)
 		threading.Thread.__init__(self)
 
 	def run(self):
-		print "TailThread: Start: " + self.logFile
+		print "\tLog4j: Start ID #" + str(self.threadId)
 		self.tail.follow(s=0)
 
 	def stop(self):
-		print "TailThread: Stop"
+		print "\tLog4j: Stop #" + str(self.threadId)
 		self.tail.end()
