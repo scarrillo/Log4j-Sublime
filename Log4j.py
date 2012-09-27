@@ -128,7 +128,7 @@ class TailThread (threading.Thread):
 
 	def run(self):
 		print "\tLog4j: Start ID #" + str(self.threadId)
-		self.tail.follow(s=0)
+		self.tail.follow(s=.05)
 
 	def stop(self):
 		print "\tLog4j: Stop #" + str(self.threadId)
