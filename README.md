@@ -1,6 +1,6 @@
-Log4j-Sublime
+Log4j tail plugin for Sublime Text
 =============
-Sublime plugin and syntax highlighting! Be gentle! Python amateur.
+Tail and level highlighting for log4j output! Be gentle! Python amateur.
 
 ![](https://raw.github.com/scarrillo/Log4j-Sublime/master/imgs/log4j.png)
 
