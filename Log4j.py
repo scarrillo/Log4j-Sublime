@@ -19,9 +19,7 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		sublime.active_window().show_input_panel('Filter: ', '', lambda s: self.doInput(s), None, None)
 
 	def doInput(self, filter):
-		# some unique name for your output panel
 		panel_name = 'log4j'
-		# relative path to your custom syntax
 		custom_syntax = 'Packages/Log4j/Log4j.tmLanguage'
 		custom_scheme = 'Packages/Log4j/Log4j.tmTheme'
 		logFile = sublime.active_window().folders()[0] + "/log4j.log"
@@ -62,22 +60,28 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		sublime.set_timeout(lambda: self.doMessage(message), 0)
 
 	def initTail(self, logFile):
-		self.initThreads()
+		self.stopTail()
 
+		print "Log4j: initTail"
 		threadId = threading.activeCount() + 1
 		tailThread = TailThread(logFile, self.doTailOut, threadId) #file, callback
 		tailThread.start()
 
-	def initThreads(self):
-		print "Log4j: Current Threads: "+str(threading.activeCount())
+	def stopTail(self):
+		print "Log4j: stopTail: Active Threads:"+str(threading.activeCount())
 
-		main = threading.currentThread()
+		#main = threading.currentThread()
 		for t in threading.enumerate():
+			print "> Closing: "+str(t)
 			if isinstance(t, TailThread):
-				#print "Stop: "+t.logFile
+				print "\tClosed: instance: "+str(t)
 				t.stop()
-			#else:
-			#	print "!Thread: "+str(t)+" | "+str(isinstance(t, TailThread))
+			elif t.__class__.__name__ == "TailThread":
+				# isinstance seems to fail when the plugin is restarted without releasing resources. This works.
+				print "\tClosed: type?: "+str(t)
+				t.stop()
+			else:
+				print "\t!Closed: "+str(t)+" | "+str(isinstance(t, TailThread))+" | "+t.__class__.__name__
 
 	def append(self, data):
 		self.output_view.set_read_only(False)
@@ -117,19 +121,23 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		#self.output_view.show_at_center(self.output_view.size())
 		#self.output_view.set_syntax_file(syn)
 
-class TailThread (threading.Thread):
+	#""" Sublime sometimes invokes this when reloading the plugin """
+	#def __del__(self):
+	#	print ">>> Log4jCommand: release"
+
+class TailThread(threading.Thread):
 	def __init__(self, logFile, callback, threadId):
 		self.logFile = logFile
 		self.tail = tail.Tail(self.logFile)
 		self.threadId = threadId
-		print "\tLog4j: init ID #"+ str(self.threadId)
+		print "\tTail: init ID #"+ str(self.threadId)
 		self.tail.register_callback(callback)
 		threading.Thread.__init__(self)
 
 	def run(self):
-		print "\tLog4j: Start ID #" + str(self.threadId)
+		print "\tTail: Start ID #" + str(self.threadId)
 		self.tail.follow(s=.05)
 
 	def stop(self):
-		print "\tLog4j: Stop #" + str(self.threadId)
+		print "\tTail: Stop #" + str(self.threadId)
 		self.tail.end()
