@@ -62,26 +62,24 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 	def initTail(self, logFile):
 		self.stopTail()
 
-		print "Log4j: initTail"
 		threadId = threading.activeCount() + 1
 		tailThread = TailThread(logFile, self.doTailOut, threadId) #file, callback
 		tailThread.start()
 
 	def stopTail(self):
-		print "Log4j: stopTail: Active Threads:"+str(threading.activeCount())
+		#print "Log4j: stopTail: Active Threads:"+str(threading.activeCount())
 
-		#main = threading.currentThread()
 		for t in threading.enumerate():
-			print "> Closing: "+str(t)
+			#print "> Closing: "+str(t)
 			if isinstance(t, TailThread):
-				print "\tClosed: instance: "+str(t)
+				#print "\tClosed: instance: "+str(t)
 				t.stop()
 			elif t.__class__.__name__ == "TailThread":
 				# isinstance seems to fail when the plugin is restarted without releasing resources. This works.
-				print "\tClosed: type?: "+str(t)
+				#print "\tClosed: type?: "+str(t)
 				t.stop()
-			else:
-				print "\t!Closed: "+str(t)+" | "+str(isinstance(t, TailThread))+" | "+t.__class__.__name__
+			#else:
+				#print "\t!Closed: "+str(t)+" | "+str(isinstance(t, TailThread))+" | "+t.__class__.__name__
 
 	def append(self, data):
 		self.output_view.set_read_only(False)
