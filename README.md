@@ -9,19 +9,7 @@ Tail and level highlighting for log4j output! Be gentle! Python amateur.
 
       - OSX: /Users/_user_/Library/Application Support/Sublime Text 2/Packages/Log4j/
   
-  2: Open: Log4j.tmTheme, copy the relevant theme 'dict' nodes to your current theme!
-
-
-  3: Create and customize your key bindings:
-
-    - Start log4j, specify a filter. Hint: debug
-      { "keys": ["super+shift+t"], "command": "log4j" }
-
-    - Bring the log4j panel to the front
-      { "keys": ["ctrl+super+t"], "command": "show_panel", "args": {"panel": "output.log4j"} },
-
-
-  4: Configure Log4j FileAppender. Example config, 'ConversionPattern' is important.
+  2: Configure Log4j FileAppender. Example config, 'ConversionPattern' is important.
 
     log4j.appender.ToFile=org.apache.log4j.FileAppender
     log4j.appender.ToFile.threshold=DEBUG
@@ -33,6 +21,14 @@ Tail and level highlighting for log4j output! Be gentle! Python amateur.
 
     - Expected output:
       [LEVEL][category]: Message
+
+##### Default key bindings (Default.sublime-keymap):
+
+    - Start log4j, specify a filter. Hint: debug
+      { "keys": ["super+shift+t"], "command": "log4j" }
+
+    - Bring the log4j panel to the front
+      { "keys": ["ctrl+super+t"], "command": "show_panel", "args": {"panel": "output.log4j"} },
 
 ##### About the files:
 
