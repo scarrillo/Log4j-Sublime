@@ -1,0 +1,13 @@
+{
+	"color_scheme": "Packages/Log4j/Log4j.tmTheme",
+	"syntax": "Packages/Log4j/Log4j.tmLanguage",
+	"log_file": "log4j.log",
+	"font_size": 11,
+	"font_face": "Menlo",
+	"font_options": [ "no_round"],
+	"line_numbers": true,
+	"extensions": [
+		"log",
+		"log4j"
+	]
+}

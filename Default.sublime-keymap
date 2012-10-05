@@ -1,0 +1,4 @@
+[
+	{ "keys": ["ctrl+super+t"], "command": "show_panel", "args": {"panel": "output.log4j"} },
+	{ "keys": ["super+shift+t"], "command": "log4j" }
+]

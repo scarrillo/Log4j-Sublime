@@ -12,16 +12,21 @@
 	<key>settings</key>
 	<array>
 		<dict>
-			<key>background</key>
-			<string>#383838</string>
-			<key>caret</key>
-			<string>#F8F8F8</string>
-			<key>foreground</key>
-			<string>#F8F8F8</string>
-			<key>invisibles</key>
-			<string>#3B3B3B</string>
-			<key>selection</key>
-			<string>#222222</string>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#22282A</string>
+				<key>caret</key>
+				<string>#AEAFAD</string>
+				<key>foreground</key>
+				<string>#F1F2F3</string>
+				<key>invisibles</key>
+				<string>#4B4E55</string>
+				<key>lineHighlight</key>
+				<string>#282A2E</string>
+				<key>selection</key>
+				<string>#4F6164</string>
+			</dict>
 		</dict>
 		<dict>
 			<key>name</key>
