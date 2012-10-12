@@ -1,0 +1,4 @@
+[
+	{ "keys": ["ctrl+shift+5"], "command": "show_panel", "args": {"panel": "output.log4j"} },
+	{ "keys": ["ctrl+5"], "command": "log4j" }
+]
