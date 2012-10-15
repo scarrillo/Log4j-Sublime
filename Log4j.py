@@ -139,7 +139,7 @@ class TailThread(threading.Thread):
 
 	def run(self):
 		print "\tTail: Start ID #" + str(self.threadId)
-		self.tail.follow(s=.05)
+		self.tail.follow(s=.02)
 
 	def stop(self):
 		print "\tTail: Stop #" + str(self.threadId)
