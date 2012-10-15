@@ -23,7 +23,7 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		self.log_file = self.settings.get("log_file")
 
 	def run(self):
-		sublime.active_window().show_input_panel('Filter: ', '', lambda s: self.doInput(s), None, None)
+		sublime.active_window().show_input_panel('Log4j Filter: ', '', lambda s: self.doInput(s), None, None)
 
 	def doInput(self, filter):
 		panel_name = 'log4j'
@@ -40,15 +40,15 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		if len(filter) != 0:
 			if filter.upper() in self.LEVELS:
 				self.level = "["+filter.upper()+"]"
-				self.append("[INFO][Log4j]: Filter Level: "+ self.level +"\n")
+				self.appendInfo("Filter Level: "+ self.level)
 				sublime.status_message("Log4j: Filter Level: "+ self.level)
 			else:
 				self.level = ""
 				self.filter = filter
-				self.append("[INFO][Log4j]: Filter String: "+ self.filter +"\n")
+				self.appendInfo("Filter String: "+ self.filter)
 				sublime.status_message("Log4j: Filter String: "+ self.level)
 		else:
-			self.append("[INFO][Log4j]: No Filter\n")
+			self.appendInfo("No Filter")
 			sublime.status_message("Log4j: No Filter")
 
 	def doMessage(self, message):
@@ -67,8 +67,12 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		self.stopTail()
 
 		threadId = threading.activeCount() + 1
-		tailThread = TailThread(logFile, self.doTailOut, threadId) #file, callback
-		tailThread.start()
+
+		try:
+			tailThread = TailThread(logFile, self.doTailOut, threadId) #file, callback
+			tailThread.start()
+		except:
+			self.appendError("Log4j: unable to tail file: "+ logFile)
 
 	def stopTail(self):
 		#print "Log4j: stopTail: Active Threads:"+str(threading.activeCount())
@@ -85,13 +89,21 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 			#else:
 				#print "\t!Closed: "+str(t)+" | "+str(isinstance(t, TailThread))+" | "+t.__class__.__name__
 
+	def appendError(self, data):
+		self.append("[ERROR][Log4j]: "+ data +"\n")
+		print "Log4j: "+data
+
+	def appendInfo(self, data):
+		self.append("[INFO][Log4j]: "+ data +"\n")
+
 	def append(self, data):
 		self.output_view.set_read_only(False)
 		edit = self.output_view.begin_edit()
 		self.output_view.insert(edit, self.output_view.size(), data)
 		self.output_view.end_edit(edit)
 		self.output_view.set_read_only(True)
-		self.output_view.show_at_center(self.output_view.size())
+		#self.output_view.show_at_center(self.output_view.size())
+		self.output_view.show(self.output_view.size())
 
 	def edit_clear(self):
 		self.output_view.set_read_only(False)
