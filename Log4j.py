@@ -4,15 +4,19 @@
 # Version 1.0
 # Date: 2012.09.23
 #
-# Credit for tail.py: 
+# Credit for tail.py:
 # Author - Kasun Herath <kasunh01 at gmail.com>
 # Source - https://github.com/kasun/python-tail
-''' 
-import sublime, sublime_plugin, os, subprocess, thread, time, tail, threading
+'''
+import sublime
+import sublime_plugin
+import tail
+import threading
+
 
 class Log4jCommand(sublime_plugin.WindowCommand):
 	def __init__(self, window):
-		sublime_plugin.WindowCommand.__init__(self, window) # super!
+		sublime_plugin.WindowCommand.__init__(self, window)
 		self.LEVELS = ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"]
 		self.loadSettings()
 
@@ -39,7 +43,7 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 
 		if len(filter) != 0:
 			if filter.upper() in self.LEVELS:
-				self.level = "["+filter.upper()+"]"
+				self.level = "["+ filter.upper() +"]"
 				self.appendInfo("Filter Level: "+ self.level)
 				sublime.status_message("Log4j: Filter Level: "+ self.level)
 			else:
@@ -52,7 +56,7 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 			sublime.status_message("Log4j: No Filter")
 
 	def doMessage(self, message):
-		if ( len(self.level) != 0 and message.startswith(self.level) ) or \
+		if (len(self.level) != 0 and message.startswith(self.level)) or \
 			(len(self.filter) != 0 and message.find(self.filter) >= 0) or \
 			(len(self.level) == 0 and len(self.filter) == 0):
 
@@ -69,7 +73,7 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 		threadId = threading.activeCount() + 1
 
 		try:
-			tailThread = TailThread(logFile, self.doTailOut, threadId) #file, callback
+			tailThread = TailThread(logFile, self.doTailOut, threadId)
 			tailThread.start()
 		except:
 			self.appendError("Log4j: unable to tail file: "+ logFile)
@@ -120,13 +124,14 @@ class Log4jCommand(sublime_plugin.WindowCommand):
 			self.output_view.set_syntax_file(syntax)
 			#Seems to be automatically pulling this
 			#self.output_view.settings().set("color_scheme", scheme)
-		
+
 		self.edit_clear()
 		sublime.active_window().run_command("show_panel", {"panel": "output."+name})
 
 	#""" Sublime sometimes invokes this when reloading the plugin """
 	#def __del__(self):
 	#	print ">>> Log4jCommand: release"
+
 
 class TailThread(threading.Thread):
 	def __init__(self, logFile, callback, threadId):
